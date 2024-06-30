@@ -68,6 +68,12 @@ Créer un super user pour django
 
 ## Lancement
 
+Lancer les deux serveurs
+
+```bash
+   node start.js
+```
+
 ### API REST DJANGO
 
 Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:8000`.
