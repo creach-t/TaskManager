@@ -16,7 +16,6 @@ exec(djangoCommand, (error, stdout, stderr) => {
         console.error(`Erreur lors du démarrage du serveur Django : ${stderr}`);
         return;
     }
-    console.log('Le serveur Django a démarré avec succès.');
 });
 
 // Démarrer le serveur React
@@ -29,7 +28,10 @@ exec(reactCommand, (error, stdout, stderr) => {
         console.error(`Erreur lors du démarrage du serveur React : ${stderr}`);
         return;
     }
-    console.log('Le serveur React a démarré avec succès.');
 });
 
 console.log('Vérification en cours de l\'application et des serveurs...');
+console.log(`*********************`);
+console.log(`L'application va se lancer sur la page http://localhost:3000/`);
+console.log(`*********************`);
+console.log(`Veuillez patienter la page s'ouvrira automatiquement`);
