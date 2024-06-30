@@ -29,11 +29,21 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 
 ## Installation
 
+Cloner le depot sur votre machine
+
+```bash
+git clone lenomdurepoGithub
+```
+
+installer les modules Nodes
+
 ```bash
   npm i
 ```
 
 ### Au besoin
+
+Migrations de modele en DB
 
 ```bash
    python3 manage.py makemigrations
@@ -43,6 +53,8 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 ```bash
    python3 manage.py migrate
 ```
+
+Créer un super user pour django
 
 ```bash
    python3 manage.py createsuperuser
