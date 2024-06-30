@@ -83,3 +83,5 @@ Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:
 Pour acceder à l'application, Ouvrez votre navigateur et accédez à `http://localhost:3000`.
 
 (Si vous avez un probleme n'hesitez pas a m'envoyer un mail)
+
+CTRL+C dans le terminal pour quitter
