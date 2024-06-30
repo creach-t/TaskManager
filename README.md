@@ -4,7 +4,7 @@ Une application de gestion de tâches simple développée avec React et Axios po
 
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine (A lancer dans l'ordre) :
 
 - Python 3.x
 - `pip` (le gestionnaire de paquets pour Python)
@@ -33,7 +33,9 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
   npm install axios
 ```
 
-## Lancement de l'API REST
+## Lancement
+
+### API REST DJANGO
 
 ```bash
    cd taskmanager
@@ -50,10 +52,11 @@ Si vous devez creer un super User :
 
 Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:8000`.
 
-## Lancement de REACT
+## Serveur REACT
 
 ```bash
-   cd ../frontend/
    npm i
    npm start
 ```
+
+Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:3000`.
