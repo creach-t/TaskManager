@@ -35,6 +35,12 @@ Cloner le depot sur votre machine
 git clone lenomdurepoGithub
 ```
 
+Se deplacer sur le dossier
+
+```bash
+cd TaskManager
+```
+
 installer les modules Nodes
 
 ```bash
