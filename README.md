@@ -27,36 +27,35 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
    sudo apt install nodejs npm
 ```
 
-- Axios (gestionnaire de requete NodeJs)
+## Installation
 
 ```bash
-  npm install axios
+  npm i
+```
+
+### Au besoin
+
+```bash
+   python3 manage.py makemigrations
+
+```
+
+```bash
+   python3 manage.py migrate
+```
+
+```bash
+   python3 manage.py createsuperuser
 ```
 
 ## Lancement
 
 ### API REST DJANGO
 
-```bash
-   cd taskmanager
-   python3 manage.py makemigrations
-   python3 manage.py migrate
-   python3 manage.py runserver
-```
-
-Si vous devez creer un super User :
-
-```bash
-   python3 manage.py createsuperuser
-```
-
 Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:8000`.
 
 ## Serveur REACT
 
-```bash
-   npm i
-   npm start
-```
+Pour acceder à l'application, Ouvrez votre navigateur et accédez à `http://localhost:3000`.
 
-Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:3000`.
+(Si vous avez un probleme n'hesitez pas a m'envoyer un mail)
