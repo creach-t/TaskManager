@@ -1,87 +1,149 @@
 # Task Manager Application
 
-Une application de gestion de tâches simple développée avec React et Axios pour interagir avec une API REST sous Django.
+Une application de gestion de tâches simple développée avec React et Axios pour interagir avec une API REST Django.
+
+## Fonctionnalités
+
+- Créer, afficher, modifier et supprimer des tâches
+- Interface utilisateur intuitive construite avec React
+- API RESTful construite avec Django REST Framework
+- Compatibilité cross-platform (Linux, Windows, macOS)
 
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine (A lancer dans l'ordre) :
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
+
+### Pour tous les systèmes :
 
 - Python 3.x
-- `pip` (le gestionnaire de paquets pour Python)
-  
+- Node.js et npm
+
+### Installation des dépendances
+
+#### Sur Linux/macOS :
+
 ```bash
-   sudo apt install python3 python3-pip
+# Installation de Python et pip
+sudo apt install python3 python3-pip    # Ubuntu/Debian
+# ou
+brew install python3                   # macOS avec Homebrew
+
+# Installation des packages Python
+pip3 install django djangorestframework django-cors-headers
+
+# Installation de Node.js et npm
+sudo apt install nodejs npm            # Ubuntu/Debian
+# ou
+brew install node                      # macOS avec Homebrew
 ```
 
-- Django
-- `djangorestframwork`
+#### Sur Windows :
 
 ```bash
-   pip3 install django djangorestframework
-```
+# Installation de Python et pip (via PowerShell ou CMD)
+# Téléchargez Python depuis python.org et installez-le
 
-- NodeJS
-- `npm` (le gestionnaire de paquets pour NodeJs)
+# Installation des packages Python
+pip install django djangorestframework django-cors-headers
 
-```bash
-   sudo apt install nodejs npm
+# Si vous utilisez Git Bash
+py -m pip install django djangorestframework django-cors-headers
+
+# Installation de Node.js et npm
+# Téléchargez depuis nodejs.org et installez-le
 ```
 
 ## Installation
 
-Cloner le depot sur votre machine
+1. Clonez le dépôt sur votre machine :
 
 ```bash
-git clone lenomdurepoGithub
-```
-
-Se deplacer sur le dossier
-
-```bash
+git clone https://github.com/creach-t/TaskManager.git
 cd TaskManager
 ```
 
-installer les modules Nodes
+2. Installez les modules Node :
 
 ```bash
-  npm i
+npm install
 ```
 
-### Au besoin
-
-Migrations de modele en DB
+3. Effectuez les migrations de la base de données :
 
 ```bash
-   python3 manage.py makemigrations
+# Sur Linux/macOS
+python3 manage.py makemigrations
+python3 manage.py migrate
 
+# Sur Windows avec Git Bash
+py manage.py makemigrations
+py manage.py migrate
+
+# Sur Windows avec CMD/PowerShell
+python manage.py makemigrations
+python manage.py migrate
 ```
+
+4. Créez un superutilisateur pour l'administration Django :
 
 ```bash
-   python3 manage.py migrate
+# Sur Linux/macOS
+python3 manage.py createsuperuser
+
+# Sur Windows avec Git Bash
+winpty py manage.py createsuperuser
+
+# Sur Windows avec CMD/PowerShell
+python manage.py createsuperuser
 ```
 
-Créer un super user pour django
+## Lancement de l'application
+
+Utilisez le script de démarrage qui lance automatiquement les deux serveurs :
 
 ```bash
-   python3 manage.py createsuperuser
+node start.js
 ```
 
-## Lancement
+Le script détectera automatiquement si vous utilisez Git Bash sur Windows et adaptera les commandes en conséquence.
 
-Lancer les deux serveurs
+### Accès à l'application
+
+- **API REST Django** : http://localhost:8000
+  - Interface d'administration : http://localhost:8000/admin/
+  - API des tâches : http://localhost:8000/api/tasks/
+
+- **Application React** : http://localhost:3000
+
+## Résolution des problèmes courants
+
+### Module manquant django-cors-headers
+
+Si vous obtenez l'erreur `ModuleNotFoundError: No module named 'corsheaders'`, installez le package manquant :
 
 ```bash
-   node start.js
+pip install django-cors-headers
+# ou sur Windows avec Git Bash
+py -m pip install django-cors-headers
 ```
 
-### API REST DJANGO
+### Problèmes d'interface TTY sur Git Bash
 
-Pour acceder à l'api, Ouvrez votre navigateur et accédez à `http://localhost:8000`.
+Si vous rencontrez des problèmes lors de la création d'un superutilisateur sur Git Bash, utilisez `winpty` :
 
-## Serveur REACT
+```bash
+winpty py manage.py createsuperuser
+```
 
-Pour acceder à l'application, Ouvrez votre navigateur et accédez à `http://localhost:3000`.
+## Développement
 
-(Si vous avez un probleme n'hesitez pas a m'envoyer un mail)
+- Le code frontend React se trouve dans le dossier `/frontend`
+- Le code backend Django se trouve dans le dossier `/taskmanager` et `/tasks`
 
-CTRL+C dans le terminal pour quitter
+## Arrêt des serveurs
+
+Pour arrêter les serveurs, appuyez sur `CTRL+C` dans le terminal où ils s'exécutent.
+
+## Contact
+
+Si vous avez des questions ou rencontrez des problèmes, n'hésitez pas à ouvrir une issue sur GitHub ou à me contacter directement.
