@@ -29,7 +29,12 @@ djangoProcess.stdout.on('data', (data) => {
 });
 
 djangoProcess.stderr.on('data', (data) => {
-    console.error(`Django erreur: ${data}`);
+    // Vérifier si c'est une vraie erreur ou juste un log Django normal
+    if (data.includes('Exception') || data.includes('Error') || data.includes('Bad Request')) {
+        console.error(`Django erreur: ${data}`);
+    } else {
+        console.log(`Django log: ${data}`);
+    }
 });
 
 // Attendre un peu avant de démarrer React pour laisser Django s'initialiser
@@ -47,7 +52,12 @@ setTimeout(() => {
     });
 
     reactProcess.stderr.on('data', (data) => {
-        console.error(`React erreur: ${data}`);
+        // Filtrer certains avertissements courants
+        if (data.includes('Deprecation') || data.includes('Browserslist')) {
+            console.log(`React avertissement: ${data}`);
+        } else {
+            console.error(`React erreur: ${data}`);
+        }
     });
 
     console.log('Vérification en cours de l\'application et des serveurs...');
