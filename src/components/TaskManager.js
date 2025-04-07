@@ -9,6 +9,7 @@ function TaskManager() {
     const [editTitle, setEditTitle] = useState(''); // Titre en cours d'édition
     const [editingTaskId, setEditingTaskId] = useState(null); // ID de la tâche en cours d'édition (ou null)
     const [error, setError] = useState(null); // Erreur
+    const [isSubmitting, setIsSubmitting] = useState(false); // État pour suivre si une soumission est en cours
 
     // Utilisation de useEffect pour charger les tâches initiales au chargement du composant
     useEffect(() => {
@@ -53,12 +54,30 @@ function TaskManager() {
     // Fonction pour soumettre le formulaire et ajouter une nouvelle tâche
     const handleSubmit = (event) => {
         event.preventDefault(); // Empêche le rechargement de la page
+        
+        // Validation : vérifier si le titre n'est pas vide
+        if (!title.trim()) {
+            setError('Le titre de la tâche ne peut pas être vide.');
+            return;
+        }
+        
+        // Empêcher les soumissions multiples
+        if (isSubmitting) return;
+        
+        setIsSubmitting(true);
+        setError(null); // Réinitialise les erreurs précédentes
+        
         axios.post('http://localhost:8000/api/tasks/', { title, completed: false })
             .then(() => {
                 setTitle(''); // Réinitialise le champ de saisie du titre
                 fetchTasks(); // Met à jour les tâches après l'ajout sur l'API
+                setIsSubmitting(false);
             })
-            .catch(error => console.error('There was an error!', error)); // Affiche une erreur en cas d'échec
+            .catch(error => {
+                console.error('There was an error!', error); // Affiche une erreur en cas d'échec
+                setError(error.response?.data || 'Erreur lors de la création de la tâche');
+                setIsSubmitting(false);
+            });
     };
 
     // Fonction pour commencer l'édition d'une tâche
@@ -69,10 +88,17 @@ function TaskManager() {
 
     // Fonction pour mettre à jour une tâche après édition
     const handleUpdate = (id) => {
+        // Validation : vérifier si le titre n'est pas vide
+        if (!editTitle.trim()) {
+            setError('Le titre de la tâche ne peut pas être vide.');
+            return;
+        }
+        
         axios.patch(`http://localhost:8000/api/tasks/${id}/`, { title: editTitle })
             .then(() => {
                 setEditingTaskId(null); // Réinitialise l'ID de la tâche en cours d'édition
                 setEditTitle(''); // Réinitialise le titre en cours d'édition
+                setError(null); // Réinitialise les erreurs
                 fetchTasks(); // Met à jour les tâches après la modification sur l'API
             })
             .catch(error => {
@@ -85,7 +111,7 @@ function TaskManager() {
     return (
         <div className="container">
             <h1>Liste des tâches</h1>
-            {error && <p>{error}</p>} {/* Affiche un message d'erreur s'il y a une erreur */}
+            {error && <p className="error-message">{error}</p>} {/* Affiche un message d'erreur s'il y a une erreur */}
 
             {/* Formulaire pour ajouter une nouvelle tâche */}
             <form onSubmit={handleSubmit}>
@@ -94,8 +120,9 @@ function TaskManager() {
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                     placeholder="Nouvelle tâche"
+                    disabled={isSubmitting}
                 />
-                <button type="submit">➕</button>
+                <button type="submit" disabled={isSubmitting || !title.trim()}>➕</button>
             </form>
 
             {/* Liste des tâches */}
@@ -130,7 +157,10 @@ function TaskManager() {
                                         onChange={e => setEditTitle(e.target.value)}
                                     />
                                     <button className="save-button" onClick={() => handleUpdate(task.id)}>💾</button>
-                                    <button className="delete-button" onClick={() => setEditingTaskId(null)}>❌</button>
+                                    <button className="delete-button" onClick={() => {
+                                        setEditingTaskId(null);
+                                        setError(null);
+                                    }}>❌</button>
                                 </>
                             ) : (
                                 // Affiche les boutons d'édition et de suppression sinon
